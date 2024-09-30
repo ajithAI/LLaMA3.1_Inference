@@ -30,9 +30,10 @@ pip3 install numpy==1.26.4
 ```
 ### 4. Install TRT-LLM : 
 
-**Unzip the "Mixtral_Inference.zip" folder to ```/home/user/Mixtral_Inference```**
+**Unzip the "LLaMA3.1_Inference.zip" folder to ```/home/user/LLaMA3.1_Inference```**
 ```
 cd /home/user/Mixtral_Inference
+#git clone https://github.com/ajithAI/LLaMA3.1_Inference.git
 git clone --recursive https://github.com/NVIDIA/TensorRT-LLM.git
 pip install typing-extensions
 pip install "cython<3"
