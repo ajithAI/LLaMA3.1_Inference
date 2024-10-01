@@ -107,6 +107,7 @@ USAGE : <RUN_SCRIPT> <BATCH_SIZE> <INPUT_LENGTH> <OUTPUT_LENGTH> <WARMUP_ITER> <
 cd ${HOSTSPACE}/LLaMA3.1_Inference
 bash ./docker_run_benchmark.sh 
 ```
+###### To save CPU Turbostat Logs & NVIDIA-SMI Logs, run from Docker Outside. 
 
 ### 11. To Re-Enter TRT-LLM Docker Environment :
 ```
