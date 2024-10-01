@@ -13,13 +13,18 @@
 ```
 export HOSTSPACE="/mnt/Scratch_space"  
 ```
+####### One Time Setup : 
 ```
 sudo docker run --runtime=nvidia --name=TensorRT_LLM_8xGPU_CUDA_12.6.0 --gpus=all --entrypoint /bin/bash \
                 --net=host --ipc=host --ulimit memlock=-1 --ulimit stack=67108864 --cap-add=SYS_PTRACE \
                 --cap-add=SYS_ADMIN --cap-add=DAC_READ_SEARCH --security-opt seccomp=unconfined -it \
                 -v ${HOSTSPACE}:/home/user -w /home/user nvidia/cuda:12.6.0-cudnn-devel-ubuntu22.04
 ```
-
+####### To Re-Enter TRT-LLM Docker Environment :
+```
+sudo docker restart TensorRT_LLM_8xGPU_CUDA_12.6.0
+sudo docker exec -it TensorRT_LLM_8xGPU_CUDA_12.6.0  bash
+``` 
 ### 3. Install Dependencies ( Inside Docker ) : 
 
 ```
@@ -32,8 +37,8 @@ pip3 install numpy==1.26.4
 
 **Unzip the "LLaMA3.1_Inference.zip" folder to ```/home/user/LLaMA3.1_Inference```**
 ```
-cd /home/user/Mixtral_Inference
-#git clone https://github.com/ajithAI/LLaMA3.1_Inference.git
+git clone https://github.com/ajithAI/LLaMA3.1_Inference.git
+cd /home/user/LLaMA3.1_Inference.git
 git clone --recursive https://github.com/NVIDIA/TensorRT-LLM.git
 pip install typing-extensions
 pip install "cython<3"
@@ -58,28 +63,28 @@ python3 -c "import tensorrt_llm"  # < Prints TRT Version >
 ```
 apt-get install git-lfs 
 git lfs install 
-git clone https://huggingface.co/mistralai/Mixtral-8x7B-v0.1 /home/user/Mixtral-8x7B-v0.1
+git clone https://huggingface.co/meta-llama/Llama-3.1-70B /home/user/Llama-3.1-70B
 ```
 
 ### 7. Run Quantization & Create Checkpoint :
 ```
-export DIR=/home/user/Mixtral_Inference && cd $DIR && mkdir $DIR/Checkpoints
+export DIR=/home/user/LLaMA3.1_Inference && cd $DIR && mkdir $DIR/Checkpoints
 ```
 ```
 cd TensorRT-LLM/examples
-python3 quantization/quantize.py --model_dir /home/user/Mixtral-8x7B-v0.1 --dtype float16 \
+python3 quantization/quantize.py --model_dir /home/user/Llama-3.1-70B --dtype float16 \
       --qformat fp8 --kv_cache_dtype fp8 --calib_size 512 --tp_size 8 \
-      --output_dir $DIR/Checkpoints/Mixtral_8x7B_v0.1_Checkpoint_FP8_8xGPU_CUDA_12.6_TRT_LLM_0.13
+      --output_dir $DIR/Checkpoints/LLaMA3.1_70B_Checkpoint_FP8_8xGPU_CUDA_12.6_TRT_LLM_0.13
 ```
 
 ### 8. Create TRT Engine :
 
 ```
-export DIR=/home/user/Mixtral_Inference && cd $DIR && mkdir $DIR/TRT_Engines
+export DIR=/home/user/LLaMA3.1_Inference && cd $DIR && mkdir $DIR/TRT_Engines
 ```
 ```
-trtllm-build --checkpoint_dir $DIR/Checkpoints/Mixtral_8x7B_v0.1_Checkpoint_FP8_8xGPU_CUDA_12.6_TRT_LLM_0.13 \
-             --output_dir $DIR/TRT_Engines/Mixtral_8x7B_v0.1_TRT_Engine_FP8_8xGPU_MaxBatch_8192_MaxSeqLen_4096_CUDA_12.6_TRT_LLM_0.13_TP_8 \
+trtllm-build --checkpoint_dir $DIR/Checkpoints/LLaMA3.1_70B_Checkpoint_FP8_8xGPU_CUDA_12.6_TRT_LLM_0.13 \
+             --output_dir $DIR/TRT_Engines/LLaMA3.1_70B_TRT_Engine_FP8_8xGPU_MaxBatch_8192_MaxSeqLen_4096_CUDA_12.6_TRT_LLM_0.13_TP_8 \
              --gemm_plugin auto --use_fp8_context_fmha enable --workers 8 --max_batch_size 8192 --max_input_len 2048 --max_seq_len 4096 
 ```
 
@@ -88,20 +93,20 @@ trtllm-build --checkpoint_dir $DIR/Checkpoints/Mixtral_8x7B_v0.1_Checkpoint_FP8_
 ```
 USAGE : <RUN_SCRIPT> <BATCH_SIZE> <INPUT_LENGTH> <OUTPUT_LENGTH> <WARMUP_ITER> <BENCHMARK_ITER> <OUTPUT_FILENAME>
 
-./run_mixtral_inference.sh 64 2048 2048 25 75 Mixtral_TRT_Batch_64_Input_2048_Output_2048
-./run_mixtral_inference.sh 96 2048 128 50 200 Mixtral_TRT_Batch_96_Input_2048_Output_128
-./run_mixtral_inference.sh 1024 128 128 50 150 Mixtral_TRT_Batch_1024_Input_128_Output_128
-./run_mixtral_inference.sh 1024 128 2048 5 25 Mixtral_TRT_Batch_1024_Input_128_Output_2048
+./run_llama_inference.sh 64 2048 2048 25 75 LLaMA3.1_70B_TRT_Batch_64_Input_2048_Output_2048
+./run_llama_inference.sh 96 2048 128 50 200 LLaMA3.1_70B_TRT_Batch_96_Input_2048_Output_128
+./run_llama_inference.sh 1024 128 128 50 150 LLaMA3.1_70B_TRT_Batch_1024_Input_128_Output_128
+./run_llama_inference.sh 1024 128 2048 5 25 LLaMA3.1_70B_TRT_Batch_1024_Input_128_Output_2048
 
-./run_mixtral_inference.sh 64 2048 1 50 250 Mixtral_TRT_Batch_64_Input_2048_Output_1
-./run_mixtral_inference.sh 96 2048 1 50 250 Mixtral_TRT_Batch_96_Input_2048_Output_1
-./run_mixtral_inference.sh 1024 128 1 50 250 Mixtral_TRT_Batch_1024_Input_128_Output_1
+./run_llama_inference.sh 64 2048 1 50 250 LLaMA3.1_70B_TRT_Batch_64_Input_2048_Output_1
+./run_llama_inference.sh 96 2048 1 50 250 LLaMA3.1_70Bl_TRT_Batch_96_Input_2048_Output_1
+./run_llama_inference.sh 1024 128 1 50 250 LLaMA3.1_70B_TRT_Batch_1024_Input_128_Output_1
 ```
 
 ### 10. To Run Benchmark from Docker Outside : 
 
 ```
-cd ${HOSTSPACE}/Mixtral_Inference
+cd ${HOSTSPACE}/LLaMA3.1_Inference
 bash ./docker_run_benchmark.sh 
 ```
 
