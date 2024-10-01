@@ -13,14 +13,14 @@
 ```
 export HOSTSPACE="/mnt/Scratch_space"  
 ```
-####### One Time Setup : 
+###### One Time Setup : 
 ```
 sudo docker run --runtime=nvidia --name=TensorRT_LLM_8xGPU_CUDA_12.6.0 --gpus=all --entrypoint /bin/bash \
                 --net=host --ipc=host --ulimit memlock=-1 --ulimit stack=67108864 --cap-add=SYS_PTRACE \
                 --cap-add=SYS_ADMIN --cap-add=DAC_READ_SEARCH --security-opt seccomp=unconfined -it \
                 -v ${HOSTSPACE}:/home/user -w /home/user nvidia/cuda:12.6.0-cudnn-devel-ubuntu22.04
 ```
-####### To Re-Enter TRT-LLM Docker Environment :
+###### To Re-Enter TRT-LLM Docker Environment :
 ```
 sudo docker restart TensorRT_LLM_8xGPU_CUDA_12.6.0
 sudo docker exec -it TensorRT_LLM_8xGPU_CUDA_12.6.0  bash
