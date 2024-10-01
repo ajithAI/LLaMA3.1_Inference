@@ -6,25 +6,20 @@
 - Check GPUs status with Command : `nvidia-smi`
 
 
-### 2. Setup TRT-LLM Docker Container : 
+### 2. Setup TRT-LLM Docker Container (One Time Setup) : 
 
 ###### Replace this with your Work Space Path. Minimum Disk Space Required : 300GB
 
 ```
 export HOSTSPACE="/mnt/Scratch_space"  
 ```
-###### One Time Setup (Skip this step, if the TRT-LLM container is already initiated) : 
 ```
 sudo docker run --runtime=nvidia --name=TensorRT_LLM_8xGPU_CUDA_12.6.0 --gpus=all --entrypoint /bin/bash \
                 --net=host --ipc=host --ulimit memlock=-1 --ulimit stack=67108864 --cap-add=SYS_PTRACE \
                 --cap-add=SYS_ADMIN --cap-add=DAC_READ_SEARCH --security-opt seccomp=unconfined -it \
                 -v ${HOSTSPACE}:/home/user -w /home/user nvidia/cuda:12.6.0-cudnn-devel-ubuntu22.04
 ```
-###### To Re-Enter TRT-LLM Docker Environment :
-```
-sudo docker restart TensorRT_LLM_8xGPU_CUDA_12.6.0
-sudo docker exec -it TensorRT_LLM_8xGPU_CUDA_12.6.0 bash
-``` 
+
 ### 3. Install Dependencies ( Inside Docker ) : 
 
 ```
@@ -110,8 +105,13 @@ cd ${HOSTSPACE}/LLaMA3.1_Inference
 bash ./docker_run_benchmark.sh 
 ```
 
+### 11. To Re-Enter TRT-LLM Docker Environment :
+```
+sudo docker restart TensorRT_LLM_8xGPU_CUDA_12.6.0
+sudo docker exec -it TensorRT_LLM_8xGPU_CUDA_12.6.0 bash
+``` 
 
-### 11. Error Handlings : 
+### 12. Error Handlings : 
 
 ###### For Error : CUDA initialization: Unexpected error from cudaGetDeviceCount()
 
