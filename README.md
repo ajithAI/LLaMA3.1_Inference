@@ -84,18 +84,21 @@ trtllm-build --checkpoint_dir $DIR/Checkpoints/LLaMA3.1_70B_Checkpoint_FP8_8xGPU
 ```
 
 ### 9. To Run Benchmark inside Docker : 
+```
+mkdir LLaMA3.1_BM_LOGS
+```
 
 ```
 USAGE : <RUN_SCRIPT> <BATCH_SIZE> <INPUT_LENGTH> <OUTPUT_LENGTH> <WARMUP_ITER> <BENCHMARK_ITER> <OUTPUT_FILENAME>
 
-./run_llama_inference.sh 64 2048 2048 25 75 LLaMA3.1_70B_TRT_Batch_64_Input_2048_Output_2048
-./run_llama_inference.sh 96 2048 128 50 200 LLaMA3.1_70B_TRT_Batch_96_Input_2048_Output_128
-./run_llama_inference.sh 1024 128 128 50 150 LLaMA3.1_70B_TRT_Batch_1024_Input_128_Output_128
-./run_llama_inference.sh 1024 128 2048 5 25 LLaMA3.1_70B_TRT_Batch_1024_Input_128_Output_2048
+./run_llama_inference.sh 64 2048 2048 25 75 LLaMA3.1_BM_LOGS/LLaMA3.1_70B_TRT_Batch_64_Input_2048_Output_2048
+./run_llama_inference.sh 96 2048 128 50 200 LLaMA3.1_BM_LOGS/LLaMA3.1_70B_TRT_Batch_96_Input_2048_Output_128
+./run_llama_inference.sh 1024 128 128 50 150 LLaMA3.1_BM_LOGS/LLaMA3.1_70B_TRT_Batch_1024_Input_128_Output_128
+./run_llama_inference.sh 1024 128 2048 5 25 LLaMA3.1_BM_LOGS/LLaMA3.1_70B_TRT_Batch_1024_Input_128_Output_2048
 
-./run_llama_inference.sh 64 2048 1 50 250 LLaMA3.1_70B_TRT_Batch_64_Input_2048_Output_1
-./run_llama_inference.sh 96 2048 1 50 250 LLaMA3.1_70Bl_TRT_Batch_96_Input_2048_Output_1
-./run_llama_inference.sh 1024 128 1 50 250 LLaMA3.1_70B_TRT_Batch_1024_Input_128_Output_1
+./run_llama_inference.sh 64 2048 1 50 250 LLaMA3.1_BM_LOGS/LLaMA3.1_70B_TRT_Batch_64_Input_2048_Output_1
+./run_llama_inference.sh 96 2048 1 50 250 LLaMA3.1_BM_LOGS/LLaMA3.1_70Bl_TRT_Batch_96_Input_2048_Output_1
+./run_llama_inference.sh 1024 128 1 50 250 LLaMA3.1_BM_LOGS/LLaMA3.1_70B_TRT_Batch_1024_Input_128_Output_1
 ```
 
 ### 10. To Run Benchmark from Docker Outside : 
