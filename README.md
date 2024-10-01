@@ -1,4 +1,4 @@
-# Mixtral_Inference
+# LLaMA3.1_Inference
 
 ### 1. Prerequisites : 
 - Install Docker & Nvidia Docker. Follow [Link](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html) </br>
