@@ -100,14 +100,25 @@ USAGE : <RUN_SCRIPT> <BATCH_SIZE> <INPUT_LENGTH> <OUTPUT_LENGTH> <WARMUP_ITER> <
 ./run_llama_inference.sh 96 2048 1 50 250 LLaMA3.1_BM_LOGS/LLaMA3.1_70Bl_TRT_Batch_96_Input_2048_Output_1
 ./run_llama_inference.sh 1024 128 1 50 250 LLaMA3.1_BM_LOGS/LLaMA3.1_70B_TRT_Batch_1024_Input_128_Output_1
 ```
+###### To save CPU Turbostat Logs & NVIDIA-SMI Logs, run from Docker Outside. 
 
 ### 10. To Run Benchmark from Docker Outside : 
 
 ```
+./docker_run_llama_inference.sh 64 2048 2048 10 50 MaxFreq
+./docker_run_llama_inference.sh 96 2048 128 50 200 MaxFreq
+./docker_run_llama_inference.sh 1024 128 128 25 100 MaxFreq
+./docker_run_llama_inference.sh 1024 128 2048 5 25 MaxFreq
+
+./docker_run_llama_inference.sh 64 2048 1 50 200 MaxFreq
+./docker_run_llama_inference.sh 96 2048 1 50 200 MaxFreq
+./docker_run_llama_inference.sh 1024 128 1 50 200 MaxFreq
+```
+##### (OR) Simply : 
+```
 cd ${HOSTSPACE}/LLaMA3.1_Inference
 bash ./docker_run_benchmark.sh 
 ```
-###### To save CPU Turbostat Logs & NVIDIA-SMI Logs, run from Docker Outside. 
 
 ### 11. To Re-Enter TRT-LLM Docker Environment :
 ```
