@@ -100,7 +100,7 @@ USAGE : <RUN_SCRIPT> <BATCH_SIZE> <INPUT_LENGTH> <OUTPUT_LENGTH> <WARMUP_ITER> <
 ./run_llama_inference.sh 96 2048 1 50 250 LLaMA3.1_BM_LOGS/LLaMA3.1_70Bl_TRT_Batch_96_Input_2048_Output_1
 ./run_llama_inference.sh 1024 128 1 50 250 LLaMA3.1_BM_LOGS/LLaMA3.1_70B_TRT_Batch_1024_Input_128_Output_1
 ```
-###### To save CPU Turbostat Logs & NVIDIA-SMI Logs, run from Docker Outside. 
+###### Note : To save CPU Turbostat Logs & NVIDIA-SMI Logs, run from Docker Outside. 
 
 ### 10. To Run Benchmark from Docker Outside : 
 
