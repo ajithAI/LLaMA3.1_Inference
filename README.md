@@ -6,7 +6,7 @@
 - Check GPUs status with Command : `nvidia-smi`
 
 
-### 2. Setup TRT-LLM Docker Container (One Time Setup) : 
+### 2. Setup TRT-LLM Docker Container : 
 
 ###### Replace this with your Work Space Path. Minimum Disk Space Required : 300GB
 
