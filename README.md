@@ -23,7 +23,7 @@ sudo docker run --runtime=nvidia --name=TensorRT_LLM_8xGPU_CUDA_12.6.0 --gpus=al
 ###### To Re-Enter TRT-LLM Docker Environment :
 ```
 sudo docker restart TensorRT_LLM_8xGPU_CUDA_12.6.0
-sudo docker exec -it TensorRT_LLM_8xGPU_CUDA_12.6.0  bash
+sudo docker exec -it TensorRT_LLM_8xGPU_CUDA_12.6.0 bash
 ``` 
 ### 3. Install Dependencies ( Inside Docker ) : 
 
