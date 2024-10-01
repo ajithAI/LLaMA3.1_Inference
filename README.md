@@ -103,6 +103,9 @@ USAGE : <RUN_SCRIPT> <BATCH_SIZE> <INPUT_LENGTH> <OUTPUT_LENGTH> <WARMUP_ITER> <
 ###### Note : To save CPU Turbostat Logs & NVIDIA-SMI Logs, run from Docker Outside. 
 
 ### 10. To Run Benchmark from Docker Outside : 
+```
+cd ${HOSTSPACE}/LLaMA3.1_Inference
+```
 
 ```
 ./docker_run_llama_inference.sh 64 2048 2048 10 50 MaxFreq
@@ -116,7 +119,6 @@ USAGE : <RUN_SCRIPT> <BATCH_SIZE> <INPUT_LENGTH> <OUTPUT_LENGTH> <WARMUP_ITER> <
 ```
 ##### (OR) Simply : 
 ```
-cd ${HOSTSPACE}/LLaMA3.1_Inference
 bash ./docker_run_benchmark.sh 
 ```
 
