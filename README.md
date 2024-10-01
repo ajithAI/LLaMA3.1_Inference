@@ -119,7 +119,7 @@ cd ${HOSTSPACE}/LLaMA3.1_Inference
 ```
 ##### (OR) Simply : 
 ```
-bash ./docker_run_benchmark.sh 
+cd ${HOSTSPACE}/LLaMA3.1_Inference && bash ./docker_run_benchmark.sh 
 ```
 
 ### 11. To Re-Enter TRT-LLM Docker Environment :
