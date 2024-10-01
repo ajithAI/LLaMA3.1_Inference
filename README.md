@@ -32,7 +32,7 @@ pip3 install numpy==1.26.4
 
 **Unzip the "LLaMA3.1_Inference.zip" folder to ```/home/user/LLaMA3.1_Inference```**
 ```
-git clone https://github.com/ajithAI/LLaMA3.1_Inference.git
+# Unzip the "LLaMA3.1_Inference.zip" folder to "/home/user/LLaMA3.1_Inference"
 cd /home/user/LLaMA3.1_Inference
 git clone --recursive https://github.com/NVIDIA/TensorRT-LLM.git
 pip install typing-extensions
