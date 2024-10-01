@@ -273,7 +273,7 @@ def print_output(tokenizer,
                 output_text = tokenizer.decode(outputs)
                 print("\nLLM Prediction :  ")
                 print(" ".join(output_text.split("\n"))+"\n")
-                print(f"\nLength : {len(output_array)}")
+                #print(f"\nLength : {len(output_array)}")
 
     
     output_ids = output_ids.reshape((-1, output_ids.size(2)))
