@@ -13,7 +13,7 @@
 ```
 export HOSTSPACE="/mnt/Scratch_space"  
 ```
-###### One Time Setup : 
+###### One Time Setup (Skip this step, if the TRT-LLM container is already initiated) : 
 ```
 sudo docker run --runtime=nvidia --name=TensorRT_LLM_8xGPU_CUDA_12.6.0 --gpus=all --entrypoint /bin/bash \
                 --net=host --ipc=host --ulimit memlock=-1 --ulimit stack=67108864 --cap-add=SYS_PTRACE \
