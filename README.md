@@ -53,7 +53,7 @@ python3 -c "import tensorrt_llm"  # < Prints TRT Version >
 [TensorRT-LLM] TensorRT-LLM version: 0.13.0.dev2024081000
 ```
 
-### 6. Download Mixtral 8x7B Model from HuggingFace : 
+### 6. Download LLaMA 3.1 70B Model from HuggingFace : 
 ###### Use Huggingface Login Credentials to download the Mixtral Model.
 ```
 apt-get install git-lfs 
